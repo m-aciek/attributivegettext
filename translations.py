@@ -7,7 +7,7 @@ class AttributiveTranslations(GNUTranslations):
         gettext = super().gettext
         pgettext = self.pgettext
 
-        class AttributableTranslationString(UserString):
+        class AttributiveTranslationString(UserString):
             def __init__(self, data):
                 super().__init__(gettext(data))
                 self.raw_data = data
@@ -15,7 +15,7 @@ class AttributiveTranslations(GNUTranslations):
             def __getattr__(self, item):
                 return pgettext(item, self.raw_data)
 
-        return AttributableTranslationString(message)
+        return AttributiveTranslationString(message)
 
 
 class NoContextFallbackTranslations(GNUTranslations):
