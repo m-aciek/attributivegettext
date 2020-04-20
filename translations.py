@@ -2,7 +2,7 @@ from collections import UserString
 from gettext import GNUTranslations
 
 
-class AttributableTranslations(GNUTranslations):
+class AttributiveTranslations(GNUTranslations):
     def gettext(self, message):
         gettext = super().gettext
         pgettext = self.pgettext

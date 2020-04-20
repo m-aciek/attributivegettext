@@ -1,7 +1,7 @@
 Extension of Python gettext that lets you use contexts as attributes in
 translation strings.
 
-It consists of two classes, ``AttributableTranslations`` which holds attributes
+It consists of two classes, ``AttributiveTranslations`` which holds attributes
 logic.
 
     msgid "user"
@@ -22,10 +22,10 @@ In example above if ``msgstr`` for ``user/nominative`` would be empty, it would
 #### Example installation
 
     from gettext import translation
-    from translations import AttributableTranslations
+    from translations import AttributiveTranslations
     from translations import NoContextFallbackTranslations
 
-    pl = translation('messages', 'locale', ['pl'], AttributableTranslations)
+    pl = translation('messages', 'locale', ['pl'], AttributiveTranslations)
     pl.add_fallback(
         translation('messages', 'locale', ['pl'], NoContextFallbackTranslations)
     )

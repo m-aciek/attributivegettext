@@ -1,8 +1,8 @@
 from gettext import translation
-from translations import AttributableTranslations
+from translations import AttributiveTranslations
 from translations import NoContextFallbackTranslations
 
-pl = translation('messages', 'locale', ['pl'], AttributableTranslations)
+pl = translation('messages', 'locale', ['pl'], AttributiveTranslations)
 pl.add_fallback(
     translation('messages', 'locale', ['pl'], NoContextFallbackTranslations)
 )
