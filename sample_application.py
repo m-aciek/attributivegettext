@@ -10,10 +10,10 @@ pl.install(('pgettext',))
 
 
 user = _('user')
-pgettext('nominative', 'user')  # noop
+pgettext('accusative', 'user')  # noop
 
 group = _('group')
-pgettext('nominative', 'group')  # noop
+pgettext('accusative', 'group')  # noop
 
 list = []
 
