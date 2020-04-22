@@ -7,17 +7,17 @@ logic.
     msgid "user"
     msgstr "użytkownik"
 
-    msgctxt "nominative"
+    msgctxt "accusative"
     msgid "user"
     msgstr "użytkownika"
 
     msgid "Select {} to change"
-    msgstr "Wybierz {.nominative} do zmiany"
+    msgstr "Wybierz {.accusative} do zmiany"
     
 Second class, ``NoContextFallbackTranslations`` in case of lacking context
 translation makes gettext fall back to translation of message without context.
-In example above if ``msgstr`` for ``user/nominative`` would be empty, it would
- prefer ``"użytkownik"`` over not translated ``user/nominative`` ``"user"``.
+In example above if ``msgstr`` for ``user/accusative`` would be empty, it would
+ prefer ``"użytkownik"`` over not translated ``user/accusative`` ``"user"``.
 
 #### Example installation
 
@@ -49,19 +49,19 @@ With translation file:
     msgid "user"
     msgstr "użytkownik"
 
-    msgctxt "nominative"
+    msgctxt "accusative"
     msgid "user"
     msgstr "użytkownika"
 
     msgid "group"
     msgstr "grupa"
 
-    msgctxt "nominative"
+    msgctxt "accusative"
     msgid "group"
     msgstr "grupę"
 
     msgid "Select {} to change"
-    msgstr "Wybierz {.nominative} do zmiany"
+    msgstr "Wybierz {.accusative} do zmiany"
 
 Will produce:
     

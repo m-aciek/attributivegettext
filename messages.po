@@ -22,7 +22,7 @@ msgid "user"
 msgstr "użytkownik"
 
 #: sample_application.py:13
-msgctxt "nominative"
+msgctxt "accusative"
 msgid "user"
 msgstr "użytkownika"
 
@@ -31,10 +31,10 @@ msgid "group"
 msgstr "grupa"
 
 #: sample_application.py:16
-msgctxt "nominative"
+msgctxt "accusative"
 msgid "group"
 msgstr "grupę"
 
 #: sample_application.py:21
 msgid "Select {} to change"
-msgstr "Wybierz {.nominative} to change"
+msgstr "Wybierz {.accusative} to change"
