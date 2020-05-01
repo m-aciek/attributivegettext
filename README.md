@@ -34,7 +34,10 @@ translation:
     msgid "Select {} to change"
     msgstr "Wybierz {.accusative} do zmiany"
 
-Languages that use grammatical cases of nouns are: German, Polish, Czech.
+Languages that use grammatical cases of nouns are: Armenian, Assamese, most 
+Balto-Slavic languages, Basque, most Caucasian languages, most Dravidian
+languages, German, Icelandic, Japanese, Korean, Latin, Sanskrit, Tibetan, the
+Turkic languages and the Uralic languages.
     
 #### Fallback
 
