@@ -1,8 +1,7 @@
-Extension of Python gettext that lets you use contexts as attributes in
-translation strings.
+Extension of Python gettext that lets you use context translations as
+attributes.
 
-It consists of two classes, ``AttributiveTranslations`` which holds attributes
-logic.
+Let's say your translation file looks as below:
 
     msgid "user"
     msgstr "użytkownik"
@@ -11,15 +10,60 @@ logic.
     msgid "user"
     msgstr "użytkownika"
 
+With ``AttributiveTranslation`` class you can access ``nominative`` context
+translation through attribute of no-context translation:
+
+    >>> user = AttributiveTranslations(…).gettext('user')
+    >>> user
+    'użytkownik'
+    >>> user.accusative
+    'użytkownika'
+    
+"OK, and what's cool about that?"
+
+Format string syntax introduced in Python 3 allows accessing arguments'
+attributes in format strings. Therefore following is possible:
+
+    >>> 'Wybierz {.accusative} do zmiany'.format(user)
+    'Wybierz użytkownika do zmiany'
+
+We are able to parametrize translation strings with e.g. nouns, which then can
+change grammatical cases in translation. Above example being a gettext
+translation:
+
     msgid "Select {} to change"
     msgstr "Wybierz {.accusative} do zmiany"
-    
-Second class, ``NoContextFallbackTranslations`` in case of lacking context
-translation makes gettext fall back to translation of message without context.
-In example above if ``msgstr`` for ``user/accusative`` would be empty, it would
- prefer ``"użytkownik"`` over not translated ``user/accusative`` ``"user"``.
 
-#### Example installation
+Languages that use grammatical cases of nouns are: German, Polish, Czech.
+    
+#### Fallback
+
+OK, but let's say we not yet have a context translation:
+
+    msgid "user"
+    msgstr "użytkownik"
+
+    msgctxt "accusative"
+    msgid "user"
+    msgstr ""  # <-- missing translation
+
+Our translation class will fallback nominative of user to original English
+string:
+
+    >>> user = AttributiveTranslations(…).gettext('user')
+    >>> 'Wybierz {.accusative} do zmiany'.format(user)
+    'Wybierz user do zmiany'
+
+``NoContextFallbackTranslations`` class will make us fall back to no-context
+translation which makes a bit better user experience:
+
+    >>> translations = AttributiveTranslations(…)
+    >>> translations.add_fallback(NoContextFallbackTranslations(…))
+    >>> user = translations.gettext('user')
+    >>> 'Wybierz {.accusative} do zmiany'.format(user)
+    'Wybierz użytkownik do zmiany'
+
+### Example installation
 
     from gettext import translation
     from translations import AttributiveTranslations
@@ -31,9 +75,9 @@ In example above if ``msgstr`` for ``user/accusative`` would be empty, it would
     )
     pl.install(('pgettext',))
 
-#### Example usage
+### Example usage
 
-Code (installation of translation ommited):
+Code (installation of translation omitted):
 
     user = _('user')
     group = _('group')
