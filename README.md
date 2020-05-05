@@ -10,7 +10,7 @@ Let's say your translation file looks as below:
     msgid "user"
     msgstr "użytkownika"
 
-With ``AttributiveTranslation`` class you can access ``nominative`` context
+With ``AttributiveTranslation`` class you can access ``accusative`` context
 translation through attribute of no-context translation:
 
     >>> user = AttributiveTranslations(…).gettext('user')
@@ -50,7 +50,7 @@ OK, but let's say we not yet have a context translation:
     msgid "user"
     msgstr ""  # <-- missing translation
 
-Our translation class will fallback nominative of user to original English
+Our translation class will fallback accusative of user to original English
 string:
 
     >>> user = AttributiveTranslations(…).gettext('user')
