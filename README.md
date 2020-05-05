@@ -50,8 +50,8 @@ OK, but let's say we not yet have a context translation:
     msgid "user"
     msgstr ""  # <-- missing translation
 
-Our translation class will fallback accusative of user to original English
-string:
+Our translation class without fallback will by default fallback accusative of
+user to original English string:
 
     >>> user = AttributiveTranslations(…).gettext('user')
     >>> 'Wybierz {.accusative} do zmiany'.format(user)
