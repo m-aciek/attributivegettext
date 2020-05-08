@@ -1,5 +1,6 @@
-Extension of Python gettext that lets you use context translations as
-attributes.
+Extension of Python gettext that makes gettext function return object which
+behave as string with translation, except you can access [context translations](https://docs.python.org/3/library/gettext.html#gettext.pgettext)
+through its attributes.
 
 Let's say your translation file looks as below:
 
@@ -34,14 +35,14 @@ translation:
     msgid "Select {} to change"
     msgstr "Wybierz {.accusative} do zmiany"
 
-Languages that use grammatical cases of nouns are: Armenian, Assamese, most 
-Balto-Slavic languages, Basque, most Caucasian languages, most Dravidian
-languages, German, Icelandic, Japanese, Korean, Latin, Sanskrit, Tibetan, the
-Turkic languages and the Uralic languages.
+Some of the languages that use grammatical cases for nouns are: Armenian,
+Assamese, most Balto-Slavic languages, Basque, most Caucasian languages, most
+Dravidian languages, German, Icelandic, Japanese, Korean, Latin, Sanskrit,
+Tibetan, the Turkic languages and the Uralic languages.
     
 #### Fallback
 
-OK, but let's say we not yet have a context translation:
+OK, but let's say we miss a context translation:
 
     msgid "user"
     msgstr "użytkownik"
@@ -50,15 +51,15 @@ OK, but let's say we not yet have a context translation:
     msgid "user"
     msgstr ""  # <-- missing translation
 
-Our translation class without fallback will by default fallback accusative of
-user to original English string:
+``AttributiveTranslation`` class without fallback by default falls back context
+translation to original English string:
 
     >>> user = AttributiveTranslations(…).gettext('user')
     >>> 'Wybierz {.accusative} do zmiany'.format(user)
     'Wybierz user do zmiany'
 
-``NoContextFallbackTranslations`` class will make us fall back to no-context
-translation which makes a bit better user experience:
+``NoContextFallbackTranslations`` class makes us fall back to no-context
+translation, which may be more desirable in our use case:
 
     >>> translations = AttributiveTranslations(…)
     >>> translations.add_fallback(NoContextFallbackTranslations(…))
