@@ -1,6 +1,7 @@
 from collections import UserString
 from io import BytesIO
 from unittest import TestCase
+from unittest.mock import Mock
 
 from translations import AttributiveTranslations
 
@@ -15,3 +16,13 @@ class AttributiveTranslationsTest(TestCase):
     def test_value_returned_is_userstring(self):
         value_returned = AttributiveTranslations(empty_mo_file).gettext('foo')
         self.assertIsInstance(value_returned, UserString)
+
+    def test_is_attributive(self):
+        t = AttributiveTranslations()
+        t.pgettext = Mock()
+        t._catalog = {}
+
+        foo = t.gettext('foo')
+        foo.attribute
+
+        t.pgettext.assert_called_once_with('attribute', 'foo')
