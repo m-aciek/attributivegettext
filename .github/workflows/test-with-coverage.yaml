@@ -1,0 +1,10 @@
+on: [push]
+jobs:
+  test-with-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@master
+      - run: pip install coverage
+      - uses: actions/checkout@master
+      - run: coverage run -m unittest tests
+      - run: coverage report --fail-under 100
