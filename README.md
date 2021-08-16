@@ -73,11 +73,11 @@ Code (installation of translation omitted):
     user = _('user')
     group = _('group')
 
-    list = []
+    selected = []
 
     for o in (user, group):
         print(_('Select {name} to change').format(name=o))
-        list.append(input(f'{o.title()}: '))
+        selected.append(input(f'{o.title()}: '))
         
 With translation file:
 
