@@ -20,5 +20,6 @@ msgid "group"
 msgstr "grupę"
 
 #: sample_application.py:17
-msgid "Select {} to change"
-msgstr "Wybierz {.accusative} do zmiany"
+#, python-brace-format
+msgid "Select {name} to change"
+msgstr "Wybierz {name.accusative} do zmiany"

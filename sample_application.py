@@ -1,9 +1,9 @@
-from gettext import translation, gettext as _, pgettext
+from gettext import translation
 from translations import AttributiveTranslations
 
 pl = translation('messages', 'locale', ['pl'], AttributiveTranslations)
-pl.install(('pgettext',))
-
+_ = pl.gettext
+pgettext = pl.pgettext
 
 user = _('user')
 pgettext('accusative', 'user')  # noop
@@ -11,11 +11,11 @@ pgettext('accusative', 'user')  # noop
 group = _('group')
 pgettext('accusative', 'group')  # noop
 
-list = []
+selected = []
 
 for o in (user, group):
-    print(_('Select {} to change').format(o))
-    list.append(input(f'{o.title()}: '))
+    print(_('Select {name} to change').format(name=o))
+    selected.append(input(f'{o.title()}: '))
 
 # translation cycle:
 # make changes

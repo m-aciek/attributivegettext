@@ -25,15 +25,15 @@ translation through attribute of no-context translation:
 Format string syntax introduced in Python 3 allows accessing arguments'
 attributes in format strings. Therefore following is possible:
 
-    >>> 'Wybierz {.accusative} do zmiany'.format(user)
+    >>> 'Wybierz {name.accusative} do zmiany'.format(name=user)
     'Wybierz użytkownika do zmiany'
 
 We are able to parametrize translation strings with e.g. nouns, which then can
 change grammatical cases in translation. Above example being a gettext
 translation:
 
-    msgid "Select {} to change"
-    msgstr "Wybierz {.accusative} do zmiany"
+    msgid "Select {name} to change"
+    msgstr "Wybierz {name.accusative} do zmiany"
 
 Some of the languages that use grammatical cases for nouns are: Armenian,
 Assamese, most Balto-Slavic languages, Basque, most Caucasian languages, most
@@ -55,7 +55,7 @@ OK, but let's say we miss a context translation:
 translation of the original English string:
 
     >>> user = AttributiveTranslations(…).gettext('user')
-    >>> 'Wybierz {.accusative} do zmiany'.format(user)
+    >>> 'Wybierz {name.accusative} do zmiany'.format(name=user)
     'Wybierz użytkownik do zmiany'
 
 ### Example installation
@@ -76,7 +76,7 @@ Code (installation of translation omitted):
     list = []
 
     for o in (user, group):
-        print(_('Select {} to change').format(o))
+        print(_('Select {name} to change').format(name=o))
         list.append(input(f'{o.title()}: '))
         
 With translation file:
@@ -95,8 +95,8 @@ With translation file:
     msgid "group"
     msgstr "grupę"
 
-    msgid "Select {} to change"
-    msgstr "Wybierz {.accusative} do zmiany"
+    msgid "Select {name} to change"
+    msgstr "Wybierz {name.accusative} do zmiany"
 
 Will produce:
     
