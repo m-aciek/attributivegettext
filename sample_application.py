@@ -1,11 +1,7 @@
-from gettext import translation
+from gettext import translation, gettext as _, pgettext
 from translations import AttributiveTranslations
-from translations import NoContextFallbackTranslations
 
 pl = translation('messages', 'locale', ['pl'], AttributiveTranslations)
-pl.add_fallback(
-    translation('messages', 'locale', ['pl'], NoContextFallbackTranslations)
-)
 pl.install(('pgettext',))
 
 
@@ -23,8 +19,8 @@ for o in (user, group):
 
 # translation cycle:
 # make changes
-# run ``xgettext sample_application.py --keyword=pgettext:1c,2`` to regenerate PO file
-# specify UTF-8 charset by replacing CHARSET text
+# run ``xgettext sample_application.py --keyword=pgettext:1c,2 --omit-header`` to regenerate PO file
+# specify UTF-8 charset by adding empty msgid with msgstr equal to "Content-Type: charset=UTF-8"
 # translate the file
 # run ``msgfmt messages.po --output locale/pl/LC_MESSAGES/messages.mo`` to compile translation into proper location
 # run localized application

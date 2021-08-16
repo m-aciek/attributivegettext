@@ -1,10 +1,8 @@
 from collections import UserString
 from io import BytesIO
 from unittest import TestCase
-from unittest.mock import Mock
 
 from translations import AttributiveTranslations
-from translations import NoContextFallbackTranslations
 
 empty_mo_file = BytesIO(b'\x95\x04\x12\xde'  # magic number, same as gettext.GNUTranslations.LE_MAGIC.to_bytes(4, 'big')
                         b'\x00\x00\x00\x01'  # version
@@ -20,19 +18,15 @@ class AttributiveTranslationsTest(TestCase):
 
     def test_is_attributive(self):
         t = AttributiveTranslations()
-        t.pgettext = Mock()
-        t._catalog = {}
+        t._catalog = {'attribute\x04foo': 'bar'}
 
         foo = t.gettext('foo')
-        foo.attribute
-
-        t.pgettext.assert_called_once_with('attribute', 'foo')
+        self.assertEqual('bar', foo.attribute)
 
     def test_fallbacks(self):
-        t = NoContextFallbackTranslations()
-        t.gettext = Mock()
-        t._catalog = {}
+        t = AttributiveTranslations()
+        t._catalog = {'user': 'użytkownik'}
 
-        t.pgettext('samplecontext', 'samplemessage')
-
-        t.gettext.assert_called_once_with('samplemessage')
+        message = t.gettext('user')
+        result = message.samplecontext
+        self.assertEqual('użytkownik', result)

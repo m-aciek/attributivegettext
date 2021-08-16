@@ -5,7 +5,7 @@ from gettext import GNUTranslations
 class AttributiveTranslations(GNUTranslations):
     def gettext(self, message):
         gettext = super().gettext
-        pgettext = self.pgettext
+        CONTEXT_SEPARATOR = '\x04'
 
         class AttributiveTranslationString(UserString):
             def __init__(self, data):
@@ -13,11 +13,9 @@ class AttributiveTranslations(GNUTranslations):
                 self.raw_data = data
 
             def __getattr__(self, item):
-                return pgettext(item, self.raw_data)
+                msg_with_ctxt = f'{item}{CONTEXT_SEPARATOR}{self.raw_data}'
+                if CONTEXT_SEPARATOR not in (result := gettext(msg_with_ctxt)):
+                    return result
+                return self.data
 
         return AttributiveTranslationString(message)
-
-
-class NoContextFallbackTranslations(GNUTranslations):
-    def pgettext(self, context, message):
-        return self.gettext(message)

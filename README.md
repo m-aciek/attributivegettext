@@ -51,19 +51,10 @@ OK, but let's say we miss a context translation:
     msgid "user"
     msgstr ""  # <-- missing translation
 
-``AttributiveTranslation`` class without fallback by default falls back context
-translation to original English string:
+``AttributiveTranslation`` class by default falls back to no-context
+translation of the original English string:
 
     >>> user = AttributiveTranslations(…).gettext('user')
-    >>> 'Wybierz {.accusative} do zmiany'.format(user)
-    'Wybierz user do zmiany'
-
-``NoContextFallbackTranslations`` class makes us fall back to no-context
-translation, which may be more desirable in our use case:
-
-    >>> translations = AttributiveTranslations(…)
-    >>> translations.add_fallback(NoContextFallbackTranslations(…))
-    >>> user = translations.gettext('user')
     >>> 'Wybierz {.accusative} do zmiany'.format(user)
     'Wybierz użytkownik do zmiany'
 
@@ -71,12 +62,8 @@ translation, which may be more desirable in our use case:
 
     from gettext import translation
     from translations import AttributiveTranslations
-    from translations import NoContextFallbackTranslations
 
     pl = translation('messages', 'locale', ['pl'], AttributiveTranslations)
-    pl.add_fallback(
-        translation('messages', 'locale', ['pl'], NoContextFallbackTranslations)
-    )
     pl.install(('pgettext',))
 
 ### Example usage
