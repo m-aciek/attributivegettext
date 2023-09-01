@@ -1,4 +1,6 @@
-Extension of Python gettext that makes gettext function return object which
+Extension of Python Gettext that gives the power to describe and use conjunctions to translators.
+
+It makes `gettext()` function return object which
 behave as string with translation, except you can access [context translations](https://docs.python.org/3/library/gettext.html#gettext.pgettext)
 through its attributes.
 
